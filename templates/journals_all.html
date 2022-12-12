@@ -1,0 +1,19 @@
+<html>
+<title>
+	{{title}}
+</title>
+<div>
+	</div>
+	<body>
+		{%for journal in journals%}
+			<ul>
+				<li> {{journal.title}} </li>
+				<li> {{journal.text_field}} </li>
+				<li> {{journal.timestamp}} </li>
+				<li> {{journal.last_updated}} </li>
+
+			{%endfor%}
+	</body>
+</html>
+
+<!-- Double braces represnts key in context which needs to be display -->

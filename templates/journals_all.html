@@ -7,6 +7,8 @@
 	<body>
 		{%for journal in journals%}
 			<ul>
+
+				<a href="{%url 'Journals:byId' journal.id%}"><li>ID:{{journal.id}}</li></a>
 				<li> {{journal.title}} </li>
 				<li> {{journal.text_field}} </li>
 				<li> {{journal.timestamp}} </li>

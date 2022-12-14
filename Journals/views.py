@@ -1,5 +1,6 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,reverse,redirect
 from .models import Journal
+from .forms import JournalForm
  # Create your views here.
 
 def journals_all(request):
@@ -26,3 +27,35 @@ def journals_by_id(request , input_id):
 	}
 
 	return render(request , 'journals_by_id.html',context)
+
+def journal_new(request):
+	form = JournalForm(request.POST or None)
+	#Will check whether is form valid or not
+	if form.is_valid():
+		#commit = False , wont save directly into db but will save into instance object
+		instance = form.save(commit=False)
+		#Will save instance object permanently to database
+		instance.save()
+		return redirect('Journals:all')
+	context={
+		'title':'New Form',
+		'form': form
+	}
+
+	return render(request , 'journal_new.html',context)
+
+def journals_edit(request,input_id):
+	journal = get_object_or_404(Journal, id = input_id)
+	form = JournalForm(request.POST or None , instance = journal)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		return redirect("Journals:byId" ,input_id= instance.id)
+
+	context={
+			"title":"Edit Journal",
+			"form":form
+	}
+
+	return render(request , 'journal_edit.html' , context)
+

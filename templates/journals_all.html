@@ -9,6 +9,8 @@
 			<ul>
 
 				<a href="{%url 'Journals:byId' journal.id%}"><li>ID:{{journal.id}}</li></a>
+				<a href="{{journal.get_absolute_url}}"><li>Abs_ID:{{journal.id}}</li></a>
+				<li> {{journal.slug}} </li>
 				<li> {{journal.title}} </li>
 				<li> {{journal.text_field}} </li>
 				<li> {{journal.timestamp}} </li>

@@ -2,6 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from django.utils import timezone
 
 class Journal(models.Model):
 	title = models.CharField(max_length = 100)
@@ -9,6 +10,10 @@ class Journal(models.Model):
 	text_field = models.TextField(max_length = 100)
 
 	slug = models.SlugField(unique=True,default="")
+
+	image = models.ImageField(null=True,blank=True)
+
+	publish = models.DateField(default=timezone.now)
 
 	timestamp = models.DateTimeField(auto_now_add = True)
 
